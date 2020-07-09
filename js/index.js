@@ -71,5 +71,18 @@ $('#loginForm').submit(function (event) {
 
         })
 
-        event.preventDefault()
+    event.preventDefault()
+})
+
+$('#logoutNav').click(function (event) {
+    localStorage.removeItem('token')
+
+    $('#loginForm').show()
+    $('#registerForm').hide()
+    $('#catNav').hide()
+    $('#dogNav').hide()
+    $('#foxNav').hide()
+    $('#logoutNav').hide()
+
+    event.preventDefault()
 })
