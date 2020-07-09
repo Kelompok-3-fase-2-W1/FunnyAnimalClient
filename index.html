@@ -31,9 +31,10 @@
                         Hello,
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" id="catNav" onClick='cat()'>cat</a>
-                        <a class="dropdown-item" id="dogNav" onClick='dog()'>dog</a>
-                        <a class="dropdown-item" id="foxNav" onClick='fox()'>fox</a>
+                        <a class="dropdown-item" id="registerNav">Register</a>
+                        <a class="dropdown-item" id="catNav">cat</a>
+                        <a class="dropdown-item" id="dogNav">dog</a>
+                        <a class="dropdown-item" id="foxNav">fox</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" id="logoutNav" href="">Sign out</a>
                     </div>
@@ -58,9 +59,6 @@
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" required>
                         </div>
-                        <div class="p-2">
-                            <span> <a href="" onclick="registerForm(event)">Not Registered?</a></span>
-                        </div>
                         <div class="row"
                             style="display: flex; flex-direction: column; margin: auto; align-items: center;">
                             <button type="submit" class="btn btn-primary" style="width: 100px;">Login</button>
@@ -73,7 +71,7 @@
                 </div>
             </div>
         </div>
-
+    
         <div id="registerForm">
             <div class="container">
                 <div class="row">
