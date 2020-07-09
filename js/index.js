@@ -1,15 +1,19 @@
 $(document).ready(function () {
 
+
     if (!localStorage.getItem('token')) {
+
         $('#loginForm').show()
         $('#registerForm').hide()
         $('#catNav').hide()
         $('#dogNav').hide()
         $('#foxNav').hide()
         $('#logoutNav').hide()
+
     } else {
         $('#loginForm').hide()
         $('#registerForm').hide()
+
     }
 })
 
@@ -54,6 +58,7 @@ $('#loginForm').submit(function (event) {
         }
     })
         .done((response) => {
+            console.log(response);
             localStorage.setItem('token', response.accessToken);
 
             $('#loginForm').hide()
@@ -71,5 +76,5 @@ $('#loginForm').submit(function (event) {
 
         })
 
-    event.preventDefault()
+    // event.preventDefault()
 })
