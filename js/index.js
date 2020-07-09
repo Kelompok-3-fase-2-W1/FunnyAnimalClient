@@ -6,7 +6,7 @@ $(document).ready(function () {
         $('#catNav').hide()
         $('#dogNav').hide()
         $('#foxNav').hide()
-        $('#signOutNav').hide()
+        $('#logoutNav').hide()
     } else {
         $('#loginForm').hide()
         $('#registerForm').hide()
@@ -36,7 +36,7 @@ $('#registerForm').submit(function (event) {
 
         })
     $('#emailRegis').val()
-    $('passwordRegis').val()
+    $('#passwordRegis').val()
 
     event.preventDefault()
 })
@@ -62,7 +62,7 @@ $('#loginForm').submit(function (event) {
             $('#catNav').show()
             $('#dogNav').show()
             $('#foxNav').show()
-            $('#signOutNav').show()
+            $('#logoutNav').show()
         })
         .fail((response) => {
 
