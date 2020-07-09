@@ -12,6 +12,34 @@
 </head>
 
 <body>
+    <div id='navbar'>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand">Funny Animals</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hello,
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" id="catNav" onClick='cat()'>cat</a>
+                        <a class="dropdown-item" id="dogNav" onClick='dog()'>dog</a>
+                        <a class="dropdown-item" id="foxNav" onClick='fox()'>fox</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logoutNav" href="" onclick="signOut();">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <div id="loginForm">
         <div class="container">
@@ -53,11 +81,6 @@
                         <h1 class="justify-content-center">Register</h1>
                         <form id="form-register" onsubmit="register(event)">
                             <div class="form-group">
-                                <label for="name">Fullname</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter Full Name"
-                                    required>
-                            </div>
-                            <div class="form-group">
                                 <label for="emailRegis">Email address</label>
                                 <input type="email" class="form-control" id="emailRegis" aria-describedby="emailHelp"
                                     placeholder="Enter email" required>
@@ -79,34 +102,6 @@
         </div>
 
         <div id='content'>
-            <div id='navbar'>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand">Funny Animals</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                        </ul>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Hello,
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" onClick='cat()'>cat</a>
-                                <a class="dropdown-item" onClick='dog()'>dog</a>
-                                <a class="dropdown-item" onClick='fox()'>fox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" onclick="signOut();" id="logout">Sign out</a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
 
             <div id="cat">
 
