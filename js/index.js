@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     if (!localStorage.getItem('token')) {
         $('#loginForm').show()
+        $('#registerNav').show()
         $('#registerForm').hide()
         $('#catNav').hide()
         $('#dogNav').hide()
@@ -12,6 +13,7 @@ $(document).ready(function () {
         $('#registerForm').hide()
     }
 })
+
 
 $('#registerForm').submit(function (event) {
     let emailRegister = $('#emailRegis').val()
@@ -57,6 +59,7 @@ $('#loginForm').submit(function (event) {
             localStorage.setItem('token', response.accessToken);
 
             $('#loginForm').hide()
+            $('#registerNav').hide()
             $('#registerForm').hide()
 
             $('#catNav').show()
@@ -74,6 +77,15 @@ $('#loginForm').submit(function (event) {
     event.preventDefault()
 })
 
+$('#registerNav').click(function (event) {
+    $('#register-error').remove()
+
+    $('#login-page').hide()
+    $('#register-page').show()
+
+    event.preventDefault()
+})
+
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
 
@@ -86,3 +98,11 @@ $('#logoutNav').click(function (event) {
 
     event.preventDefault()
 })
+
+// function registerForm(event) {
+//     event.preventDefault()
+//     $('#registerForm').show()
+//     $('#loginForm').hide()
+//     $('#emailRegis').val('')
+//     $('#passwordRegis').val('')
+// }
