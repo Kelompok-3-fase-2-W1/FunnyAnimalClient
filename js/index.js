@@ -17,6 +17,8 @@ $(document).ready(function () {
     } else {
         $('#loginForm').hide()
         $('#registerForm').hide()
+        $(`#loginNav`).hide()
+        $(`#registerNav`).hide()
 
     }
 })
@@ -65,6 +67,7 @@ $('#form-login').submit(function (event) {
             console.log(response);
             localStorage.setItem('token', response.token);
 
+            $('#loginNav').hide()
             $('#loginForm').hide()
             $('#registerNav').hide()
             $('#registerForm').hide()
@@ -92,6 +95,13 @@ $('#registerNav').click(function (event) {
     $('#loginForm').hide()
 })
 
+$('#loginNav').click(function (event) {
+    // $('#register-error').remove()
+
+    $('#registerForm').hide()
+    $('#loginForm').show()
+})
+
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
     $('#email').val('')
@@ -113,6 +123,119 @@ $('#logoutNav').click(function (event) {
 //     $('#emailRegis').val('')
 //     $('#passwordRegis').val('')
 // }
+
+$('#catNav').click(function(event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/cat`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response[0].url);
+            
+            $('#cat').empty();
+            $('#cat').append(
+                `<img src="${response[0].url}" >`
+            )
+
+            $(`#cat`).show();
+            $(`#dog`).hide()
+            $(`#fox`).hide()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
+
+    event.preventDefault()
+})
+
+$('#dogNav').click(function(event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/dog`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response);
+            
+            // console.log(response.url.slice(response.url.length-4))
+
+            const fileFormat = response.url.slice(response.url.length-4);
+            
+            $('#dog').empty();
+            if(fileFormat == `.mp4`) {
+                $('#dog').append(
+                    `<video controls>
+                    <source src="${response.url}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>`
+                )
+            } else {
+                $('#dog').append(
+                    `<img src="${response.url}">`
+                )
+            }
+            
+
+            $(`#cat`).hide();
+            $(`#dog`).show()
+            $(`#fox`).hide()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
+
+    event.preventDefault()
+})
+
+$('#foxNav').click(function(event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/fox`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response);
+            
+            $('#fox').empty();
+            $('#fox').append(
+                `<img src="${response.image}" >`
+            )
+
+            $(`#cat`).hide();
+            $(`#dog`).hide()
+            $(`#fox`).show()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
+
+    event.preventDefault()
+})
 
 function onSignIn(googleUser) {
     const google_token = googleUser.getAuthResponse().id_token;
