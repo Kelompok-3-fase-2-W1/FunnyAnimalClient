@@ -111,6 +111,11 @@ $('#logoutNav').click(function (event) {
     $('#catNav').hide()
     $('#dogNav').hide()
     $('#foxNav').hide()
+
+    $('#cat').hide()
+    $('#dog').hide()
+    $('#fox').hide()
+
     $('#logoutNav').hide()
 
     event.preventDefault()
