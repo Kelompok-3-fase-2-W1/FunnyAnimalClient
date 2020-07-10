@@ -145,7 +145,7 @@ $('#catNav').click(function (event) {
 
             $('#cat').empty();
             $('#cat').append(
-                `<img src="${response[0].url}" >`
+                `<img class="image" src="${response[0].url}" >`
             )
 
             $(`#cat`).show();
@@ -190,7 +190,7 @@ $('#dogNav').click(function (event) {
                 )
             } else {
                 $('#dog').append(
-                    `<img src="${response.url}">`
+                    `<img class="image" src="${response.url}">`
                 )
             }
 
@@ -225,7 +225,7 @@ $('#foxNav').click(function (event) {
 
             $('#fox').empty();
             $('#fox').append(
-                `<img src="${response.image}" >`
+                `<img class="image" src="${response.image}" >`
             )
 
             $(`#cat`).hide();
