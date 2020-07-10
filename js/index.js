@@ -1,6 +1,18 @@
 
 const SERVER_PATH = `http://localhost:3000`
 
+function logInDisplay() {
+
+    $('#catNav').show()
+    $('#dogNav').show()
+    $('#foxNav').show()
+    $('#logoutNav').show()
+    $('#loginForm').hide()
+    $('#registerNav').hide()
+    $('#registerForm').hide()
+
+}
+
 $(document).ready(function () {
 
 
@@ -64,15 +76,8 @@ $('#form-login').submit(function (event) {
         .done((response) => {
             console.log(response);
             localStorage.setItem('token', response.token);
+            logInDisplay()
 
-            $('#loginForm').hide()
-            $('#registerNav').hide()
-            $('#registerForm').hide()
-
-            $('#catNav').show()
-            $('#dogNav').show()
-            $('#foxNav').show()
-            $('#logoutNav').show()
         })
         .fail((response) => {
             alert(response.responseText)
@@ -94,6 +99,7 @@ $('#registerNav').click(function (event) {
 
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
+    googleSignOut()
     $('#email').val('')
     $('#password').val('')
     $('#loginForm').show()
@@ -106,26 +112,23 @@ $('#logoutNav').click(function (event) {
     event.preventDefault()
 })
 
-// function registerForm(event) {
-//     event.preventDefault()
-//     $('#registerForm').show()
-//     $('#loginForm').hide()
-//     $('#emailRegis').val('')
-//     $('#passwordRegis').val('')
-// }
-
 function onSignIn(googleUser) {
+
     const google_token = googleUser.getAuthResponse().id_token;
 
     $.ajax({
-        url: `http://localhost:3000/login/google`,
+        url: `${SERVER_PATH}/login/google`,
         method: `POST`,
         headers: {
             google_token
         }
     })
         .done(response => {
+
+            logInDisplay()
             console.log(response);
+            localStorage.setItem('token', response.token);
+
         })
         .fail(response => {
             console.log(response);
@@ -134,4 +137,15 @@ function onSignIn(googleUser) {
         .always(response => {
             console.log(response);
         })
+    event.preventDefault()
 }
+
+
+function googleSignOut() {
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
+

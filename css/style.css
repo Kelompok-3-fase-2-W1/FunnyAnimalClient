@@ -1,3 +1,16 @@
+body{
+    font-family: 'Merienda One', cursive;
+    font-size: 15px;
+    color:#336d88;
+    background-image: url('../img/background.jpg') ;
+}
+
+.navbar-brand{
+    font-family: 'Merienda One', cursive;
+    font-size: 20px;
+    color:#336d88 !important;
+}
+
 #detail-todo{
     /* border: 1px solid black;
     background-color: blue; */
@@ -20,4 +33,17 @@
 
 #loginForm, #registerForm{
     padding-top: 50px; 
+}
+
+#logo{
+    width: 100px;
+}
+
+#navbar{
+    margin-top: 25px;
+}
+
+#form-login{
+    box-shadow: aquamarine;
+    background-color:#a6dcef;    
 }

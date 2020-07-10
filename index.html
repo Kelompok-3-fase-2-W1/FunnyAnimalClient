@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id" content="(API GOOGLE)">
     <title>Funny Animals</title>
+    <!-- booststrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="./css/style.css" type="text/css" rel="stylesheet">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
     <!-- google api -->
     <meta name="google-signin-client_id"
-        content="1055302973797-0ktdegei194s8bd7p7iaf4ruuo889oom.apps.googleusercontent.com">
+        content="1055302973797-u8huidg2poppcn92m3v2dg9lbnsmg9o8.apps.googleusercontent.com">
 </head>
 
 <body>
     <div id='navbar'>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand">Funny Animals</a>
+            <a class="navbar-brand"> <img id='logo' src="img/animals.png" alt=""> Funny Animals</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,20 +52,20 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="border col-md-4" style="padding: 30px; border-radius: 20px;">
-                    <h1 class="justify-content-center">LOGIN</h1>
+                    <h1 class="justify-content-center">LOGIN</h1><br>
                     <form id="form-login">
                         <div class="form-group">
                             <label for="email">Email address</label>
                             <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                                 placeholder="Enter email" required>
-                        </div>
+                        </div><br>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" required>
                         </div>
                         <div class="row"
                             style="display: flex; flex-direction: column; margin: auto; align-items: center;">
-                            <button type="submit" class="btn btn-primary" style="width: 100px;">Login</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100px;">Login</button><br>
                             <p>or</p>
                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>
