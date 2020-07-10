@@ -10,6 +10,11 @@ function logInDisplay() {
     $('#loginForm').hide()
     $('#registerNav').hide()
     $('#registerForm').hide()
+    $('#loginNav').hide()
+    $('#content').show()
+    $('#dog').hide()
+    $('#cat').hide()
+    $('#fox').hide()
 
 }
 
@@ -25,6 +30,7 @@ $(document).ready(function () {
         $('#dogNav').hide()
         $('#foxNav').hide()
         $('#logoutNav').hide()
+        $('#content').hide()
 
     } else {
         $('#loginForm').hide()
@@ -55,6 +61,7 @@ $('#form-register').submit(function (event) {
         })
         .fail(response => {
             console.log(response.responseText);
+            alert(response.responseJSON.errors)
         })
         .always(response => {
             console.log('ini always');
@@ -84,14 +91,19 @@ $('#form-login').submit(function (event) {
             $('#loginForm').hide()
             $('#registerNav').hide()
             $('#registerForm').hide()
+            $('#dog').hide()
+            $('#cat').hide()
+            $('#fox').hide()
 
             $('#catNav').show()
             $('#dogNav').show()
             $('#foxNav').show()
             $('#logoutNav').show()
+            $('#content').show()
+
         })
         .fail((response) => {
-            alert(response.responseText)
+            alert(response.responseJSON.errors)
             console.log(response.responseText);
         })
         .always((response) => {
@@ -113,6 +125,7 @@ $('#loginNav').click(function (event) {
 
     $('#registerForm').hide()
     $('#loginForm').show()
+
 })
 
 $('#logoutNav').click(function (event) {
@@ -131,6 +144,8 @@ $('#logoutNav').click(function (event) {
     $('#fox').hide()
 
     $('#logoutNav').hide()
+    $('#content').hide()
+
 
     event.preventDefault()
 })
