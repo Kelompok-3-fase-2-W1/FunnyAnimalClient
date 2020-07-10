@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function () {
 
 
@@ -111,3 +114,25 @@ $('#logoutNav').click(function (event) {
 //     $('#emailRegis').val('')
 //     $('#passwordRegis').val('')
 // }
+
+function onSignIn(googleUser) {
+    const google_token = googleUser.getAuthResponse().id_token;
+
+    $.ajax({
+        url: `http://localhost:3000/login/google`,
+        method: `POST`,
+        headers: {
+            google_token
+        }
+    })
+        .done(response => {
+            console.log(response);
+        })
+        .fail(response => {
+            console.log(response);
+            localStorage.setItem('token', response.token)
+        })
+        .always(response => {
+            console.log(response);
+        })
+}
