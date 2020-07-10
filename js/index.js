@@ -1,6 +1,18 @@
 
 const SERVER_PATH = `http://localhost:3000`
 
+function logInDisplay() {
+
+    $('#catNav').show()
+    $('#dogNav').show()
+    $('#foxNav').show()
+    $('#logoutNav').show()
+    $('#loginForm').hide()
+    $('#registerNav').hide()
+    $('#registerForm').hide()
+
+}
+
 $(document).ready(function () {
 
 
@@ -66,6 +78,7 @@ $('#form-login').submit(function (event) {
         .done((response) => {
             console.log(response);
             localStorage.setItem('token', response.token);
+            logInDisplay()
 
             $('#loginNav').hide()
             $('#loginForm').hide()
@@ -104,6 +117,7 @@ $('#loginNav').click(function (event) {
 
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
+    googleSignOut()
     $('#email').val('')
     $('#password').val('')
     $('#loginForm').show()
@@ -121,15 +135,7 @@ $('#logoutNav').click(function (event) {
     event.preventDefault()
 })
 
-// function registerForm(event) {
-//     event.preventDefault()
-//     $('#registerForm').show()
-//     $('#loginForm').hide()
-//     $('#emailRegis').val('')
-//     $('#passwordRegis').val('')
-// }
-
-$('#catNav').click(function(event) {
+$('#catNav').click(function (event) {
 
 
     $.ajax({
@@ -141,10 +147,10 @@ $('#catNav').click(function(event) {
     })
         .done((response) => {
             console.log(response[0].url);
-            
+
             $('#cat').empty();
             $('#cat').append(
-                `<img src="${response[0].url}" >`
+                `<img class="image" src="${response[0].url}" >`
             )
 
             $(`#cat`).show();
@@ -162,7 +168,7 @@ $('#catNav').click(function(event) {
     event.preventDefault()
 })
 
-$('#dogNav').click(function(event) {
+$('#dogNav').click(function (event) {
 
 
     $.ajax({
@@ -174,13 +180,13 @@ $('#dogNav').click(function(event) {
     })
         .done((response) => {
             console.log(response);
-            
+
             // console.log(response.url.slice(response.url.length-4))
 
-            const fileFormat = response.url.slice(response.url.length-4);
-            
+            const fileFormat = response.url.slice(response.url.length - 4);
+
             $('#dog').empty();
-            if(fileFormat == `.mp4`) {
+            if (fileFormat == `.mp4`) {
                 $('#dog').append(
                     `<video controls>
                     <source src="${response.url}" type="video/mp4">
@@ -189,10 +195,10 @@ $('#dogNav').click(function(event) {
                 )
             } else {
                 $('#dog').append(
-                    `<img src="${response.url}">`
+                    `<img class="image" src="${response.url}">`
                 )
             }
-            
+
 
             $(`#cat`).hide();
             $(`#dog`).show()
@@ -209,7 +215,7 @@ $('#dogNav').click(function(event) {
     event.preventDefault()
 })
 
-$('#foxNav').click(function(event) {
+$('#foxNav').click(function (event) {
 
 
     $.ajax({
@@ -221,10 +227,10 @@ $('#foxNav').click(function(event) {
     })
         .done((response) => {
             console.log(response);
-            
+
             $('#fox').empty();
             $('#fox').append(
-                `<img src="${response.image}" >`
+                `<img class="image" src="${response.image}" >`
             )
 
             $(`#cat`).hide();
@@ -243,17 +249,22 @@ $('#foxNav').click(function(event) {
 })
 
 function onSignIn(googleUser) {
+
     const google_token = googleUser.getAuthResponse().id_token;
 
     $.ajax({
-        url: `http://localhost:3000/login/google`,
+        url: `${SERVER_PATH}/login/google`,
         method: `POST`,
         headers: {
             google_token
         }
     })
         .done(response => {
+
+            logInDisplay()
             console.log(response);
+            localStorage.setItem('token', response.token);
+
         })
         .fail(response => {
             console.log(response);
@@ -262,4 +273,15 @@ function onSignIn(googleUser) {
         .always(response => {
             console.log(response);
         })
+    event.preventDefault()
 }
+
+
+function googleSignOut() {
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
+
