@@ -29,6 +29,8 @@ $(document).ready(function () {
     } else {
         $('#loginForm').hide()
         $('#registerForm').hide()
+        $(`#loginNav`).hide()
+        $(`#registerNav`).hide()
 
     }
 })
@@ -78,6 +80,15 @@ $('#form-login').submit(function (event) {
             localStorage.setItem('token', response.token);
             logInDisplay()
 
+            $('#loginNav').hide()
+            $('#loginForm').hide()
+            $('#registerNav').hide()
+            $('#registerForm').hide()
+
+            $('#catNav').show()
+            $('#dogNav').show()
+            $('#foxNav').show()
+            $('#logoutNav').show()
         })
         .fail((response) => {
             alert(response.responseText)
@@ -97,6 +108,13 @@ $('#registerNav').click(function (event) {
     $('#loginForm').hide()
 })
 
+$('#loginNav').click(function (event) {
+    // $('#register-error').remove()
+
+    $('#registerForm').hide()
+    $('#loginForm').show()
+})
+
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
     googleSignOut()
@@ -108,6 +126,119 @@ $('#logoutNav').click(function (event) {
     $('#dogNav').hide()
     $('#foxNav').hide()
     $('#logoutNav').hide()
+
+    event.preventDefault()
+})
+
+$('#catNav').click(function (event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/cat`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response[0].url);
+
+            $('#cat').empty();
+            $('#cat').append(
+                `<img src="${response[0].url}" >`
+            )
+
+            $(`#cat`).show();
+            $(`#dog`).hide()
+            $(`#fox`).hide()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
+
+    event.preventDefault()
+})
+
+$('#dogNav').click(function (event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/dog`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response);
+
+            // console.log(response.url.slice(response.url.length-4))
+
+            const fileFormat = response.url.slice(response.url.length - 4);
+
+            $('#dog').empty();
+            if (fileFormat == `.mp4`) {
+                $('#dog').append(
+                    `<video controls>
+                    <source src="${response.url}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>`
+                )
+            } else {
+                $('#dog').append(
+                    `<img src="${response.url}">`
+                )
+            }
+
+
+            $(`#cat`).hide();
+            $(`#dog`).show()
+            $(`#fox`).hide()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
+
+    event.preventDefault()
+})
+
+$('#foxNav').click(function (event) {
+
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER_PATH}/fox`,
+        headers: {
+            token: localStorage.getItem('token')
+        }
+    })
+        .done((response) => {
+            console.log(response);
+
+            $('#fox').empty();
+            $('#fox').append(
+                `<img src="${response.image}" >`
+            )
+
+            $(`#cat`).hide();
+            $(`#dog`).hide()
+            $(`#fox`).show()
+        })
+        .fail((response) => {
+            alert(response.responseText)
+            console.log(response.responseText);
+        })
+        .always((response) => {
+            console.log(`ini always`);
+        })
 
     event.preventDefault()
 })

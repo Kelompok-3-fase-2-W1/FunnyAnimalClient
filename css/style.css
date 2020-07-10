@@ -1,15 +1,15 @@
-body{
+/* body{
     font-family: 'Merienda One', cursive;
     font-size: 15px;
     color:#336d88;
     background-image: url('../img/background.jpg') ;
-}
+} */
 
-.navbar-brand{
+/* .navbar-brand{
     font-family: 'Merienda One', cursive;
     font-size: 20px;
     color:#336d88 !important;
-}
+} */
 
 #detail-todo{
     /* border: 1px solid black;
@@ -35,15 +35,23 @@ body{
     padding-top: 50px; 
 }
 
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: auto
+    }
+
+video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: auto
+}
+
 #logo{
-    width: 100px;
-}
-
-#navbar{
-    margin-top: 25px;
-}
-
-#form-login{
-    box-shadow: aquamarine;
-    background-color:#a6dcef;    
+    width:35px;
 }
