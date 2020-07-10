@@ -8,6 +8,7 @@ $(document).ready(function () {
 
         $('#loginForm').show()
         $('#registerNav').show()
+        $('#loginNav').hide()
         $('#registerForm').hide()
         $('#catNav').hide()
         $('#dogNav').hide()
@@ -89,14 +90,25 @@ $('#registerNav').click(function (event) {
 
     $('#registerForm').show()
     $('#loginForm').hide()
+    $('#registerNav').hide()
+    $('#loginNav').show()
 
     // event.preventDefault()
+})
+
+$('#loginNav').click(function (event) {
+    $('#registerForm').hide()
+    $('#loginForm').show()
+    $('#registerNav').show()
+    $('#loginNav').hide()
 })
 
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
 
     $('#loginForm').show()
+    $('#registerNav').show()
+    $('#loginNav').hide()
     $('#registerForm').hide()
     $('#catNav').hide()
     $('#dogNav').hide()
