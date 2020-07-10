@@ -1,6 +1,11 @@
+
+const SERVER_PATH = `http://localhost:3000`
+
 $(document).ready(function () {
 
+
     if (!localStorage.getItem('token')) {
+
         $('#loginForm').show()
         $('#registerNav').show()
         $('#registerForm').hide()
@@ -8,55 +13,57 @@ $(document).ready(function () {
         $('#dogNav').hide()
         $('#foxNav').hide()
         $('#logoutNav').hide()
+
     } else {
         $('#loginForm').hide()
         $('#registerForm').hide()
+
     }
 })
 
 
-$('#registerForm').submit(function (event) {
+$('#form-register').submit(function (event) {
     let emailRegister = $('#emailRegis').val()
-    let passwordRegister = $('passwordRegis').val()
+    let passwordRegister = $('#passwordRegis').val()
 
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/register',
+        url: `${SERVER_PATH}/register`,
         data: {
             email: emailRegister,
             password: passwordRegister
         }
     })
-        .done((response) => {
-            $('loginForm').show()
-            $('registerForm').hide()
+        .done(response => {
+            console.log(response);
+            $('#loginForm').show()
+            $('#registerForm').hide()
         })
-        .fail((xhr, status, error) => {
-
+        .fail(response => {
+            console.log(response.responseText);
         })
-        .always((response) => {
-
+        .always(response => {
+            console.log('ini always');
         })
-    $('#emailRegis').val()
-    $('#passwordRegis').val()
 
     event.preventDefault()
 })
 
-$('#loginForm').submit(function (event) {
+$('#form-login').submit(function (event) {
     let emailLogin = $('#email').val()
     let passwordLogin = $('#password').val()
 
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: `${SERVER_PATH}/login`,
         data: {
             email: emailLogin,
             password: passwordLogin
         }
     })
         .done((response) => {
-            localStorage.setItem('token', response.accessToken);
+            console.log(response);
+            localStorage.setItem('token', response.token);
 
             $('#loginForm').hide()
             $('#registerNav').hide()
@@ -68,27 +75,27 @@ $('#loginForm').submit(function (event) {
             $('#logoutNav').show()
         })
         .fail((response) => {
-
+            alert(response.responseText)
+            console.log(response.responseText);
         })
         .always((response) => {
-
+            console.log(`ini always`);
         })
 
     event.preventDefault()
 })
 
 $('#registerNav').click(function (event) {
-    $('#register-error').remove()
+    // $('#register-error').remove()
 
-    $('#login-page').hide()
-    $('#register-page').show()
-
-    event.preventDefault()
+    $('#registerForm').show()
+    $('#loginForm').hide()
 })
 
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
-
+    $('#email').val('')
+    $('#password').val('')
     $('#loginForm').show()
     $('#registerForm').hide()
     $('#catNav').hide()
@@ -106,3 +113,25 @@ $('#logoutNav').click(function (event) {
 //     $('#emailRegis').val('')
 //     $('#passwordRegis').val('')
 // }
+
+function onSignIn(googleUser) {
+    const google_token = googleUser.getAuthResponse().id_token;
+
+    $.ajax({
+        url: `http://localhost:3000/login/google`,
+        method: `POST`,
+        headers: {
+            google_token
+        }
+    })
+        .done(response => {
+            console.log(response);
+        })
+        .fail(response => {
+            console.log(response);
+            localStorage.setItem('token', response.token)
+        })
+        .always(response => {
+            console.log(response);
+        })
+}
