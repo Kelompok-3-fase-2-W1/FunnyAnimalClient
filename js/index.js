@@ -55,7 +55,7 @@ $('#form-login').submit(function (event) {
 
     $.ajax({
         method: 'POST',
-        url: `${SERVER_PATH}/register`,
+        url: `${SERVER_PATH}/login`,
         data: {
             email: emailLogin,
             password: passwordLogin
@@ -63,7 +63,7 @@ $('#form-login').submit(function (event) {
     })
         .done((response) => {
             console.log(response);
-            localStorage.setItem('token', response.accessToken);
+            localStorage.setItem('token', response.token);
 
             $('#loginForm').hide()
             $('#registerNav').hide()
@@ -75,6 +75,7 @@ $('#form-login').submit(function (event) {
             $('#logoutNav').show()
         })
         .fail((response) => {
+            alert(response.responseText)
             console.log(response.responseText);
         })
         .always((response) => {
@@ -89,13 +90,12 @@ $('#registerNav').click(function (event) {
 
     $('#registerForm').show()
     $('#loginForm').hide()
-
-    // event.preventDefault()
 })
 
 $('#logoutNav').click(function (event) {
     localStorage.removeItem('token')
-
+    $('#email').val('')
+    $('#password').val('')
     $('#loginForm').show()
     $('#registerForm').hide()
     $('#catNav').hide()
